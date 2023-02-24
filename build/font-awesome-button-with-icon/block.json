@@ -1,12 +1,11 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "create-block/dy-wordpress-gutenberg-blocks",
-  "version": "0.1.0",
-  "title": "Dy Wordpress Gutenberg Blocks",
-  "category": "widgets",
-  "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "name": "dy-wordpress-gutenberg-blocks/font-awesome-button-with-icon",
+  "version": "1.0.0",
+  "title": "Font Awesome - Button with Icon",
+  "category": "dy-wordpress-gutenberg-blocks",
+  "description": "Use free Font Awesome icons to display with buttons",
   "supports": {
     "html": false
   },
