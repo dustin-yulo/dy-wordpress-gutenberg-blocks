@@ -1,16 +1,79 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, FormTokenField } from '@wordpress/components';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import './editor.scss';
 
 
-export default function DYFontAwesomeButtonWithIconEdit() {
+export default function DYFontAwesomeButtonWithIconEdit( { attributes, setAttributes } ) {
+
+	const { fontAwesomeClass } = attributes;
+
+	const allFontAwesomeIcons = [
+		...Object.values( fas ),
+		...Object.values( far ),
+		...Object.values( fab )
+	];
+
+	library.add( ...allFontAwesomeIcons );
+	//dom.watch();
+	
+	const fontAwesomeIconSuggestions = [];
+
+	allFontAwesomeIcons.forEach( ( eachFontAwesomeIcon ) => {
+		const eachFontAwesomeIconPrefix = eachFontAwesomeIcon.prefix === 'fas' ? 'fa-solid'
+											: eachFontAwesomeIcon.prefix === 'far' ? 'fa-regular'
+											: eachFontAwesomeIcon.prefix === 'fab' ? 'fa-brands'
+											: '';
+		const eachFontAwesomeIconDetails = eachFontAwesomeIconPrefix + ' ' + eachFontAwesomeIcon.iconName;
+
+		if ( !fontAwesomeIconSuggestions.includes( eachFontAwesomeIconDetails ) ) {
+			fontAwesomeIconSuggestions.push( eachFontAwesomeIconDetails );
+		}
+	} );
+
+	const onSelectedFontAwesomeIconsChange = ( tokens ) => {
+		const selectedFontAwesomeIcons = [ ...fontAwesomeClass ];
+
+		tokens.forEach( ( postName ) => {
+			if( !selectedFontAwesomeIcons.includes( postName ) ) {
+				selectedFontAwesomeIcons.push( postName );
+			}
+		} );
+
+		setAttributes( { fontAwesomeClass: selectedFontAwesomeIcons } );
+	};
+
+
 	return (
-		<p { ...useBlockProps() }>
+		<div { ...useBlockProps() }>
 			{ __(
 				'DYFontAwesomeButtonWithIconEdit',
 				'dy-wordpress-gutenberg-blocks'
 			) }
-		</p>
+			<InspectorControls>
+				<PanelBody>
+					<FormTokenField
+						label={ __( 'Font Awesome icon class name', 'dy-wordpress-gutenberg-blocks' ) }
+						value={ fontAwesomeClass }
+						onChange={ onSelectedFontAwesomeIconsChange }
+						suggestions={ fontAwesomeIconSuggestions }
+						maxLength={ 1 }
+					/>
+					{/* <ComboboxControl
+						label={ __( 'Select an icon', 'dy-wordpress-gutenberg-blocks' ) }
+						onChange={ ( newFontAwesomeClass ) => setAttributes( { fontAwesomeClass: newFontAwesomeClass } ) }
+						onFilterValueChange={ ( newFontAwesomeClass ) => setAttributes( { fontAwesomeClass: newFontAwesomeClass } ) }
+						options={fontAwesomeIconOptions}
+						value={ fontAwesomeClass }
+					/> */}
+				</PanelBody>
+			</InspectorControls>
+		</div>
 	);
 }
 
