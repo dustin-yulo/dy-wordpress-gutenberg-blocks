@@ -1,1 +1,0 @@
-import './font-awesome-button-with-icon/index.js';

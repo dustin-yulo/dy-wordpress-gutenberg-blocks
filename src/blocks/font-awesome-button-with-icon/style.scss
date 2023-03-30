@@ -1,0 +1,30 @@
+.wp-block-dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.6em 1.2em;
+    font-size: 1.2em;
+    width: fit-content;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    color: #fff;
+    background-color: #32373c;
+    border: 2px solid;
+
+    &.is-style-dy-font-awesome-button-with-icon-outline-button {
+        color: #000;
+        background-color: transparent !important;
+    }
+
+    .dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon {
+
+        &.icon-left {
+            order: 0;
+        }
+
+        &.icon-right {
+            order: 1;
+        }
+    }
+}

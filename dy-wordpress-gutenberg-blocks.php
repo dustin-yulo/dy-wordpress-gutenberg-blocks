@@ -6,6 +6,7 @@
  * Requires PHP:      7.0
  * Version:           1.0.0
  * Author:            Dustin Yulo
+ * Author URI:		  https://dustinyulo.com/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       dy-wordpress-gutenberg-blocks
@@ -39,6 +40,6 @@ add_action( 'block_categories_all', 'dy_wordpress_gutenberg_blocks_add_block_cat
  * through the block editor in the corresponding context.
  */
 function dy_wordpress_gutenberg_blocks_init() {
-	register_block_type( __DIR__ . '/build/font-awesome-button-with-icon' );
+	register_block_type( __DIR__ . '/build/blocks/font-awesome-button-with-icon' );
 }
 add_action( 'init', 'dy_wordpress_gutenberg_blocks_init' );

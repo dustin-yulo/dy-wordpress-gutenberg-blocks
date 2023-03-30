@@ -4,7 +4,6 @@
 	"description": "Custom WordPress Gutenberg blocks that you just might need. Simple, lightweight, free!",
 	"author": "Dustin Yulo",
 	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build",
 		"format": "wp-scripts format",
@@ -22,6 +21,9 @@
 		"@fortawesome/free-brands-svg-icons": "^6.3.0",
 		"@fortawesome/free-regular-svg-icons": "^6.3.0",
 		"@fortawesome/free-solid-svg-icons": "^6.3.0",
-		"@fortawesome/react-fontawesome": "^0.2.0"
+		"@fortawesome/react-fontawesome": "^0.2.0",
+		"@wordpress/block-editor": "^11.6.0",
+		"@wordpress/components": "^23.6.0",
+		"react-window": "^1.8.8"
 	}
 }

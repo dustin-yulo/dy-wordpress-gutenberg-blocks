@@ -14,9 +14,26 @@
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
   "attributes": {
-    "fontAwesomeClass": {
-      "type": "array",
-      "default": []
+    "selectedFontAwesomeIcon": {
+      "type": "object",
+      "default": {}
+    },
+    "fontAwesomeIconPosition": {
+      "type": "string",
+      "default": "left"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonTextColor": {
+      "type": "string"
+    },
+    "buttonBackgroundColor": {
+      "type": "string"
+    },
+    "buttonBorderColor": {
+      "type": "string"
     }
   }
 }
