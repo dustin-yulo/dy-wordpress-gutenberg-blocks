@@ -14,17 +14,17 @@
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"attributes": {
-        "selectedFontAwesomeIcon": {
-            "type": "object",
-            "default": {}
-        },
+		"selectedFontAwesomeIcon": {
+			"type": "object",
+			"default": {}
+		},
 		"fontAwesomeIconPosition": {
 			"type": "string",
-            "default": "left"
+			"default": "left"
 		},
 		"buttonText": {
 			"type": "string",
-            "default": ""
+			"default": ""
 		},
 		"buttonTextColor": {
 			"type": "string"
@@ -35,5 +35,5 @@
 		"buttonBorderColor": {
 			"type": "string"
 		}
-    }
+	}
 }

@@ -1,11 +1,8 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
-
 export default function DYFontAwesomeButtonWithIconSave() {
 	return (
-		<p { ...useBlockProps.save() }>
-			{ 'DYFontAwesomeButtonWithIconSave' }
-		</p>
+		<p { ...useBlockProps.save() }>{ 'DYFontAwesomeButtonWithIconSave' }</p>
 	);
 }
 
