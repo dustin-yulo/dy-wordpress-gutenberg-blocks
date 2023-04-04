@@ -14,6 +14,7 @@ import {
 	CheckboxControl,
 } from '@wordpress/components';
 import DYColorToolsPanel from '../../components/tools-panel/colors';
+import DYBorderToolsPanel from '../../components/tools-panel/border';
 import { useState } from '@wordpress/element';
 import { FixedSizeGrid } from 'react-window';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -33,7 +34,8 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 		buttonText,
 		buttonTextColor,
 		buttonBackgroundColor,
-		buttonBorderColor,
+		buttonBorderSettings,
+		buttonBorderRadius,
 	} = attributes;
 
 	const [ isIconFinderOpen, setIconFinderOpen ] = useState( false );
@@ -228,7 +230,22 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 			style={ {
 				color: buttonTextColor,
 				backgroundColor: buttonBackgroundColor,
-				borderColor: buttonBorderColor,
+				borderWidth: buttonBorderSettings?.width,
+				borderStyle: buttonBorderSettings?.style,
+				borderColor: buttonBorderSettings?.color,
+				borderRadius:
+					( buttonBorderRadius?.top
+						? `${ buttonBorderRadius.top.width } `
+						: '' ) +
+						( buttonBorderRadius?.right
+							? `${ buttonBorderRadius.right.width } `
+							: '' ) +
+						( buttonBorderRadius?.bottom
+							? `${ buttonBorderRadius.bottom.width } `
+							: '' ) +
+						( buttonBorderRadius?.left
+							? `${ buttonBorderRadius.left.width } `
+							: '' ) || buttonBorderRadius?.width,
 			} }
 		>
 			<InspectorControls>
@@ -309,13 +326,12 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 						</PanelRow>
 					</PanelBody>
 					<DYColorToolsPanel
-						colorOptions={ [ 'text', 'background', 'border' ] }
+						colorOptions={ [ 'text', 'background' ] }
 						resetAllColors={ () => {
-							setAttributes( { buttonTextColor: undefined } );
 							setAttributes( {
+								buttonTextColor: undefined,
 								buttonBackgroundColor: undefined,
 							} );
-							setAttributes( { buttonBorderColor: undefined } );
 						} }
 						textColor={ buttonTextColor }
 						onTextColorDeselect={ () =>
@@ -339,13 +355,35 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 								buttonBackgroundColor: newButtonBackgroundColor,
 							} )
 						}
-						borderColor={ buttonBorderColor }
-						onBorderColorDeselect={ () =>
-							setAttributes( { buttonBorderColor: undefined } )
-						}
-						onBorderColorChange={ ( newButtonBorderColor ) =>
+					/>
+					<DYBorderToolsPanel
+						borderOptions={ [ 'border', 'radius' ] }
+						resetAllBorders={ () => {
 							setAttributes( {
-								buttonBorderColor: newButtonBorderColor,
+								buttonBorderSettings: undefined,
+								buttonBorderRadius: undefined,
+							} );
+						} }
+						borderShorthand={ buttonBorderSettings }
+						onBorderShorthandChange={ ( newButtonBorderSettings ) =>
+							setAttributes( {
+								buttonBorderSettings: newButtonBorderSettings,
+							} )
+						}
+						onBorderShorthandDeselect={ () =>
+							setAttributes( {
+								buttonBorderSettings: undefined,
+							} )
+						}
+						borderRadius={ buttonBorderRadius }
+						onBorderRadiusChange={ ( newButtonBorderRadius ) =>
+							setAttributes( {
+								buttonBorderRadius: newButtonBorderRadius,
+							} )
+						}
+						onBorderRadiusDeselect={ () =>
+							setAttributes( {
+								buttonBorderRadius: undefined,
 							} )
 						}
 					/>
