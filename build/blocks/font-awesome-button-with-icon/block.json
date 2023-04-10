@@ -40,6 +40,9 @@
     },
     "buttonBorderRadius": {
       "type": "object"
+    },
+    "buttonWidth": {
+      "type": "string"
     }
   }
 }

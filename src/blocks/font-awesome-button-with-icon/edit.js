@@ -8,6 +8,7 @@ import {
 	PanelBody,
 	PanelRow,
 	Button,
+	ButtonGroup,
 	Modal,
 	SelectControl,
 	SearchControl,
@@ -36,6 +37,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 		buttonBackgroundColor,
 		buttonBorderSettings,
 		buttonBorderRadius,
+		buttonWidth,
 	} = attributes;
 
 	const [ isIconFinderOpen, setIconFinderOpen ] = useState( false );
@@ -48,6 +50,18 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 		fontAwesomeIconCategoriesSelected,
 		setFontAwesomeIconCategoriesSelected,
 	] = useState( [] );
+
+	const onButtonWidthChange = ( newButtonWidth ) => {
+		if ( buttonWidth !== undefined && buttonWidth === newButtonWidth ) {
+			setAttributes( {
+				buttonWidth: undefined,
+			} );
+		} else {
+			setAttributes( {
+				buttonWidth: newButtonWidth,
+			} );
+		}
+	};
 
 	const allFontAwesomeIcons = [
 		...new Set(
@@ -246,6 +260,11 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 						( buttonBorderRadius?.left
 							? `${ buttonBorderRadius.left.width } `
 							: '' ) || buttonBorderRadius?.width,
+				width:
+					buttonWidth === 'full' &&
+					`calc(100% - (2.4em + ${
+						buttonBorderSettings?.width || '2px'
+					} * 2))`,
 			} }
 		>
 			<InspectorControls>
@@ -324,6 +343,41 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 								/>
 							</div>
 						</PanelRow>
+					</PanelBody>
+					<PanelBody
+						title={ __(
+							'Width settings',
+							'dy-wordpress-gutenberg-blocks'
+						) }
+					>
+						<ButtonGroup
+							aria-label={ _x(
+								'Button width',
+								'button group for button width aria label',
+								'dy-wordpress-gutenberg-blocks'
+							) }
+						>
+							<Button
+								isSmall={ true }
+								onClick={ () => onButtonWidthChange( 'fit' ) }
+								text={ _x(
+									'Fit',
+									'button width size',
+									'dy-wordpress-gutenberg-blocks'
+								) }
+								variant={ buttonWidth === 'fit' && 'primary' }
+							/>
+							<Button
+								isSmall={ true }
+								onClick={ () => onButtonWidthChange( 'full' ) }
+								text={ _x(
+									'Full',
+									'button width size',
+									'dy-wordpress-gutenberg-blocks'
+								) }
+								variant={ buttonWidth === 'full' && 'primary' }
+							/>
+						</ButtonGroup>
 					</PanelBody>
 					<DYColorToolsPanel
 						colorOptions={ [ 'text', 'background' ] }
