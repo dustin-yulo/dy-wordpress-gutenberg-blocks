@@ -3,6 +3,8 @@ import {
 	useBlockProps,
 	InspectorControls,
 	RichText,
+	BlockControls,
+	AlignmentToolbar,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -33,6 +35,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 		selectedFontAwesomeIcon,
 		fontAwesomeIconPosition,
 		buttonText,
+		buttonTextAlignment,
 		buttonTextColor,
 		buttonBackgroundColor,
 		buttonBorderSettings,
@@ -62,6 +65,26 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 			} );
 		}
 	};
+
+	let buttonJustifyContent = '';
+
+	switch ( buttonTextAlignment ) {
+		case 'left':
+			buttonJustifyContent = 'flex-start';
+			break;
+
+		case 'center':
+			buttonJustifyContent = 'center';
+			break;
+
+		case 'right':
+			buttonJustifyContent = 'flex-end';
+			break;
+
+		default:
+			buttonJustifyContent = '';
+			break;
+	}
 
 	const allFontAwesomeIcons = [
 		...new Set(
@@ -265,6 +288,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 					`calc(100% - (2.4em + ${
 						buttonBorderSettings?.width || '2px'
 					} * 2))`,
+				justifyContent: buttonJustifyContent,
 			} }
 		>
 			<InspectorControls>
@@ -443,6 +467,16 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 					/>
 				</div>
 			</InspectorControls>
+			<BlockControls>
+				<AlignmentToolbar
+					value={ buttonTextAlignment }
+					onChange={ ( newButtonTextAlignment ) =>
+						setAttributes( {
+							buttonTextAlignment: newButtonTextAlignment,
+						} )
+					}
+				/>
+			</BlockControls>
 
 			{ isIconFinderOpen && (
 				<Modal
