@@ -66,7 +66,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 		}
 	};
 
-	let buttonJustifyContent = '';
+	let buttonJustifyContent;
 
 	switch ( buttonTextAlignment ) {
 		case 'left':
@@ -82,7 +82,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 			break;
 
 		default:
-			buttonJustifyContent = '';
+			buttonJustifyContent = undefined;
 			break;
 	}
 
@@ -283,11 +283,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 						( buttonBorderRadius?.left
 							? `${ buttonBorderRadius.left.width } `
 							: '' ) || buttonBorderRadius?.width,
-				width:
-					buttonWidth === 'full' &&
-					`calc(100% - (2.4em + ${
-						buttonBorderSettings?.width || '2px'
-					} * 2))`,
+				width: buttonWidth === 'full' ? '100%' : undefined,
 				justifyContent: buttonJustifyContent,
 			} }
 		>

@@ -12,6 +12,7 @@
 	color: #fff;
 	background-color: #32373c;
 	border: 2px solid;
+	box-sizing: border-box;
 
 	&.is-style-dy-font-awesome-button-with-icon-outline-button {
 		color: #000;
@@ -19,6 +20,9 @@
 	}
 
 	.dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon {
+		width: auto;
+		height: 1em;
+		flex-shrink: 0;
 
 		&.icon-left {
 			order: 0;
