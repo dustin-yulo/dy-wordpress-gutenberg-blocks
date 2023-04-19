@@ -26,6 +26,15 @@
 			"type": "string",
 			"default": ""
 		},
+		"buttonLink": {
+			"type": "string"
+		},
+		"buttonLinkTarget": {
+			"type": "string"
+		},
+		"buttonLinkRel": {
+			"type": "string"
+		},
 		"buttonTextAlignment": {
 			"type": "string"
 		},

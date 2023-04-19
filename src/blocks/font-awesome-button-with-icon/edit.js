@@ -5,6 +5,7 @@ import {
 	RichText,
 	BlockControls,
 	AlignmentToolbar,
+	__experimentalLinkControl as LinkControl,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -15,10 +16,14 @@ import {
 	SelectControl,
 	SearchControl,
 	CheckboxControl,
+	ToolbarButton,
+	Popover,
 } from '@wordpress/components';
+import { prependHTTP } from '@wordpress/url';
+import { link, linkOff } from '@wordpress/icons';
 import DYColorToolsPanel from '../../components/tools-panel/colors';
 import DYBorderToolsPanel from '../../components/tools-panel/border';
-import { useState } from '@wordpress/element';
+import { useState, useRef, useEffect } from '@wordpress/element';
 import { FixedSizeGrid } from 'react-window';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,10 +35,14 @@ import './editor.scss';
 export default function DYFontAwesomeButtonWithIconEdit( {
 	attributes,
 	setAttributes,
+	isSelected,
 } ) {
 	const {
 		selectedFontAwesomeIcon,
 		fontAwesomeIconPosition,
+		buttonLink,
+		buttonLinkTarget,
+		buttonLinkRel,
 		buttonText,
 		buttonTextAlignment,
 		buttonTextColor,
@@ -48,6 +57,45 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 	const closeIconFinder = () => setIconFinderOpen( false );
 
 	const [ iconFinderSearchInput, setIconFinderSearchInput ] = useState( '' );
+
+	const [ isEditingButtonLink, setIsEditingButtonLink ] = useState( false );
+
+	const blockReference = useRef( null );
+
+	const isButtonLinkSet = !! buttonLink;
+	const opensInNewTab = buttonLinkTarget === '_blank';
+	const NEW_TAB_REL = 'noreferrer noopener';
+
+	function unlink() {
+		setAttributes( {
+			buttonLink: undefined,
+			buttonLinkTarget: undefined,
+			buttonLinkRel: undefined,
+		} );
+		setIsEditingButtonLink( false );
+	}
+
+	function onToggleOpenInNewTab( value ) {
+		const newButtonLinkTarget = value ? '_blank' : undefined;
+
+		let updatedRel = buttonLinkRel;
+		if ( newButtonLinkTarget && ! buttonLinkRel ) {
+			updatedRel = NEW_TAB_REL;
+		} else if ( ! newButtonLinkTarget && buttonLinkRel === NEW_TAB_REL ) {
+			updatedRel = undefined;
+		}
+
+		setAttributes( {
+			buttonLinkTarget: newButtonLinkTarget,
+			buttonLinkRel: updatedRel,
+		} );
+	}
+
+	useEffect( () => {
+		if ( ! isSelected ) {
+			setIsEditingButtonLink( false );
+		}
+	}, [ isSelected ] );
 
 	const [
 		fontAwesomeIconCategoriesSelected,
@@ -262,31 +310,56 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 	};
 
 	return (
-		<div
-			{ ...useBlockProps() }
-			style={ {
-				color: buttonTextColor,
-				backgroundColor: buttonBackgroundColor,
-				borderWidth: buttonBorderSettings?.width,
-				borderStyle: buttonBorderSettings?.style,
-				borderColor: buttonBorderSettings?.color,
-				borderRadius:
-					( buttonBorderRadius?.top
-						? `${ buttonBorderRadius.top.width } `
-						: '' ) +
-						( buttonBorderRadius?.right
-							? `${ buttonBorderRadius.right.width } `
+		<>
+			<div
+				{ ...useBlockProps( { ref: blockReference } ) }
+				style={ {
+					color: buttonTextColor,
+					backgroundColor: buttonBackgroundColor,
+					borderWidth: buttonBorderSettings?.width,
+					borderStyle: buttonBorderSettings?.style,
+					borderColor: buttonBorderSettings?.color,
+					borderRadius:
+						( buttonBorderRadius?.top
+							? `${ buttonBorderRadius.top.width } `
 							: '' ) +
-						( buttonBorderRadius?.bottom
-							? `${ buttonBorderRadius.bottom.width } `
-							: '' ) +
-						( buttonBorderRadius?.left
-							? `${ buttonBorderRadius.left.width } `
-							: '' ) || buttonBorderRadius?.width,
-				width: buttonWidth === 'full' ? '100%' : undefined,
-				justifyContent: buttonJustifyContent,
-			} }
-		>
+							( buttonBorderRadius?.right
+								? `${ buttonBorderRadius.right.width } `
+								: '' ) +
+							( buttonBorderRadius?.bottom
+								? `${ buttonBorderRadius.bottom.width } `
+								: '' ) +
+							( buttonBorderRadius?.left
+								? `${ buttonBorderRadius.left.width } `
+								: '' ) || buttonBorderRadius?.width,
+					width: buttonWidth === 'full' ? '100%' : undefined,
+					justifyContent: buttonJustifyContent,
+				} }
+			>
+				{ Object.keys( selectedFontAwesomeIcon ).length !== 0 && (
+					<FontAwesomeIcon
+						icon={ selectedFontAwesomeIcon }
+						className={
+							'dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon' +
+							( fontAwesomeIconPosition === 'left'
+								? ' icon-left'
+								: ' icon-right' )
+						}
+					/>
+				) }
+				<RichText
+					value={ buttonText }
+					onChange={ ( newButtonText ) =>
+						setAttributes( { buttonText: newButtonText } )
+					}
+					placeholder={ __(
+						'Add text…',
+						'dy-wordpress-gutenberg-blocks'
+					) }
+					className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__richtext"
+					withoutInteractiveFormatting={ true }
+				/>
+			</div>
 			<InspectorControls>
 				<div className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon-inspector-controls">
 					<PanelBody
@@ -463,7 +536,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 					/>
 				</div>
 			</InspectorControls>
-			<BlockControls>
+			<BlockControls group="block">
 				<AlignmentToolbar
 					value={ buttonTextAlignment }
 					onChange={ ( newButtonTextAlignment ) =>
@@ -472,8 +545,68 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 						} )
 					}
 				/>
+				{ ! isButtonLinkSet && (
+					<ToolbarButton
+						name="link"
+						icon={ link }
+						title={ _x(
+							'Link',
+							'to add a link',
+							'dy-wordpress-gutenberg-blocks'
+						) }
+						onClick={ () => setIsEditingButtonLink( true ) }
+					/>
+				) }
+				{ isButtonLinkSet && (
+					<ToolbarButton
+						name="link"
+						icon={ linkOff }
+						title={ _x(
+							'Unlink',
+							'to remove a link',
+							'dy-wordpress-gutenberg-blocks'
+						) }
+						onClick={ unlink }
+						isActive={ true }
+					/>
+				) }
 			</BlockControls>
+			{ isSelected && ( isEditingButtonLink || isButtonLinkSet ) && (
+				<Popover
+					placement="bottom"
+					onClose={ () => setIsEditingButtonLink( false ) }
+					anchor={ blockReference.current }
+					focusOnMount={
+						isEditingButtonLink ? 'firstElement' : false
+					}
+					__unstableSlotName={ '__unstable-block-tools-after' }
+					shift
+				>
+					<LinkControl
+						className="wp-block-navigation-link__inline-link-input"
+						value={ {
+							url: buttonLink,
+							opensInNewTab,
+						} }
+						onChange={ ( {
+							url: newURL = '',
+							opensInNewTab: newOpensInNewTab,
+						} ) => {
+							setAttributes( {
+								buttonLink: prependHTTP( newURL ),
+							} );
 
+							if ( opensInNewTab !== newOpensInNewTab ) {
+								onToggleOpenInNewTab( newOpensInNewTab );
+							}
+						} }
+						onRemove={ () => {
+							unlink();
+						} }
+						forceIsEditingLink={ isEditingButtonLink }
+					/>
+				</Popover>
+			) }
 			{ isIconFinderOpen && (
 				<Modal
 					title={ __(
@@ -497,29 +630,6 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 					<FontAwesomeIconsGrid />
 				</Modal>
 			) }
-
-			{ Object.keys( selectedFontAwesomeIcon ).length !== 0 && (
-				<FontAwesomeIcon
-					icon={ selectedFontAwesomeIcon }
-					className={
-						'dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon' +
-						( fontAwesomeIconPosition === 'left'
-							? ' icon-left'
-							: ' icon-right' )
-					}
-				/>
-			) }
-			<RichText
-				value={ buttonText }
-				onChange={ ( newButtonText ) =>
-					setAttributes( { buttonText: newButtonText } )
-				}
-				placeholder={ __(
-					'Add text…',
-					'dy-wordpress-gutenberg-blocks'
-				) }
-				className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__richtext"
-			/>
-		</div>
+		</>
 	);
 }

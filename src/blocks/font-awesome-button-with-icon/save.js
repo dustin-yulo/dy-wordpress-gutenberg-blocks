@@ -5,6 +5,9 @@ export default function DYFontAwesomeButtonWithIconSave( { attributes } ) {
 	const {
 		selectedFontAwesomeIcon,
 		fontAwesomeIconPosition,
+		buttonLink,
+		buttonLinkTarget,
+		buttonLinkRel,
 		buttonText,
 		buttonTextAlignment,
 		buttonTextColor,
@@ -35,8 +38,11 @@ export default function DYFontAwesomeButtonWithIconSave( { attributes } ) {
 	}
 
 	return (
-		<div
+		<a
 			{ ...useBlockProps.save() }
+			href={ buttonLink }
+			target={ buttonLinkTarget }
+			rel={ buttonLinkRel }
 			style={ {
 				color: buttonTextColor,
 				backgroundColor: buttonBackgroundColor,
@@ -75,6 +81,6 @@ export default function DYFontAwesomeButtonWithIconSave( { attributes } ) {
 				value={ buttonText }
 				className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__richtext"
 			/>
-		</div>
+		</a>
 	);
 }
