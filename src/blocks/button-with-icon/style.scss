@@ -1,4 +1,4 @@
-.wp-block-dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon {
+.wp-block-dy-wordpress-gutenberg-blocks-button-with-icon {
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: center;
@@ -14,12 +14,12 @@
 	border: 2px solid;
 	box-sizing: border-box;
 
-	&.is-style-dy-font-awesome-button-with-icon-outline-button {
+	&.is-style-dy-button-with-icon-outline-button {
 		color: #000;
 		background-color: transparent !important;
 	}
 
-	.dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon {
+	.dy-wordpress-gutenberg-blocks-button-with-icon__icon {
 		width: auto;
 		height: 1em;
 		flex-shrink: 0;

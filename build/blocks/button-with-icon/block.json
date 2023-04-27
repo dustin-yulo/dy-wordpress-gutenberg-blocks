@@ -1,11 +1,11 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "dy-wordpress-gutenberg-blocks/font-awesome-button-with-icon",
+  "name": "dy-wordpress-gutenberg-blocks/button-with-icon",
   "version": "1.0.0",
-  "title": "Font Awesome - Button with Icon",
+  "title": "Button with Icon",
   "category": "dy-wordpress-gutenberg-blocks",
-  "description": "Use free Font Awesome icons to display with buttons",
+  "description": "Use free icons from Font Awesome to display with your buttons",
   "supports": {
     "html": false
   },

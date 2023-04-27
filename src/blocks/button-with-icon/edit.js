@@ -32,7 +32,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import './editor.scss';
 
-export default function DYFontAwesomeButtonWithIconEdit( {
+export default function DYButtonWithIconEdit( {
 	attributes,
 	setAttributes,
 	isSelected,
@@ -184,7 +184,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 		};
 
 		return (
-			<div className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal__icon-category-container">
+			<div className="dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal__icon-category-container">
 				<CheckboxControl
 					label="Solid"
 					checked={ fontAwesomeIconCategoriesSelected.includes(
@@ -194,7 +194,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 						onFontAwesomeIconCategoriesSelectedChange( 'fas' )
 					}
 					className={
-						'dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal__icon-category' +
+						'dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal__icon-category' +
 						( fontAwesomeIconCategoriesSelected.includes( 'fas' )
 							? ' checked'
 							: '' )
@@ -209,7 +209,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 						onFontAwesomeIconCategoriesSelectedChange( 'far' )
 					}
 					className={
-						'dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal__icon-category' +
+						'dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal__icon-category' +
 						( fontAwesomeIconCategoriesSelected.includes( 'far' )
 							? ' checked'
 							: '' )
@@ -224,7 +224,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 						onFontAwesomeIconCategoriesSelectedChange( 'fab' )
 					}
 					className={
-						'dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal__icon-category' +
+						'dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal__icon-category' +
 						( fontAwesomeIconCategoriesSelected.includes( 'fab' )
 							? ' checked'
 							: '' )
@@ -293,7 +293,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 
 		return (
 			<FixedSizeGrid
-				className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal__icon-grid"
+				className="dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal__icon-grid"
 				columnCount={ numberOfColumns }
 				columnWidth={ 120 }
 				rowCount={ Math.ceil(
@@ -340,7 +340,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 					<FontAwesomeIcon
 						icon={ selectedFontAwesomeIcon }
 						className={
-							'dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon' +
+							'dy-wordpress-gutenberg-blocks-button-with-icon__icon' +
 							( fontAwesomeIconPosition === 'left'
 								? ' icon-left'
 								: ' icon-right' )
@@ -356,12 +356,12 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 						'Add text…',
 						'dy-wordpress-gutenberg-blocks'
 					) }
-					className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__richtext"
+					className="dy-wordpress-gutenberg-blocks-button-with-icon__richtext"
 					withoutInteractiveFormatting={ true }
 				/>
 			</div>
 			<InspectorControls>
-				<div className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon-inspector-controls">
+				<div className="dy-wordpress-gutenberg-blocks-button-with-icon-inspector-controls">
 					<PanelBody
 						title={ __( 'Icon', 'dy-wordpress-gutenberg-blocks' ) }
 					>
@@ -610,7 +610,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 			{ isIconFinderOpen && (
 				<Modal
 					title={ __(
-						'Select a Font Awesome icon',
+						'Select an icon',
 						'dy-wordpress-gutenberg-blocks'
 					) }
 					closeButtonLabel={ __(
@@ -618,7 +618,7 @@ export default function DYFontAwesomeButtonWithIconEdit( {
 						'dy-wordpress-gutenberg-blocks'
 					) }
 					onRequestClose={ closeIconFinder }
-					className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal"
+					className="dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal"
 				>
 					<SearchControl
 						value={ iconFinderSearchInput }

@@ -1,7 +1,7 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function DYFontAwesomeButtonWithIconSave( { attributes } ) {
+export default function DYButtonWithIconSave( { attributes } ) {
 	const {
 		selectedFontAwesomeIcon,
 		fontAwesomeIconPosition,
@@ -43,6 +43,7 @@ export default function DYFontAwesomeButtonWithIconSave( { attributes } ) {
 			href={ buttonLink }
 			target={ buttonLinkTarget }
 			rel={ buttonLinkRel }
+			role="button"
 			style={ {
 				color: buttonTextColor,
 				backgroundColor: buttonBackgroundColor,
@@ -70,7 +71,7 @@ export default function DYFontAwesomeButtonWithIconSave( { attributes } ) {
 				<FontAwesomeIcon
 					icon={ selectedFontAwesomeIcon }
 					className={
-						'dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon' +
+						'dy-wordpress-gutenberg-blocks-button-with-icon__icon' +
 						( fontAwesomeIconPosition === 'left'
 							? ' icon-left'
 							: ' icon-right' )
@@ -79,7 +80,7 @@ export default function DYFontAwesomeButtonWithIconSave( { attributes } ) {
 			) }
 			<RichText.Content
 				value={ buttonText }
-				className="dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__richtext"
+				className="dy-wordpress-gutenberg-blocks-button-with-icon__richtext"
 			/>
 		</a>
 	);

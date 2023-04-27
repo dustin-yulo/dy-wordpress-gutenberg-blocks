@@ -1,4 +1,4 @@
-.dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon-inspector-controls {
+.dy-wordpress-gutenberg-blocks-button-with-icon-inspector-controls {
 
 	.dy-icon-buttons-container {
 		display: flex;
@@ -23,18 +23,18 @@
 	}
 }
 
-.dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal {
+.dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal {
 	max-height: calc(100% - 120px);
 	max-width: calc(100% - 120px);
 
-	.dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal__icon-category-container {
+	.dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal__icon-category-container {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		gap: 20px;
 		margin: 20px 0 0;
 
-		.dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal__icon-category {
+		.dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal__icon-category {
 			width: 100%;
 
 			.components-base-control__field {
@@ -80,7 +80,7 @@
 		}
 	}
 
-	.dy-wordpress-gutenberg-blocks-font-awesome-button-with-icon__icon-finder-modal__icon-grid {
+	.dy-wordpress-gutenberg-blocks-button-with-icon__icon-finder-modal__icon-grid {
 		list-style: none;
 		background: #f0f0f0;
 		margin: 20px 0 0;

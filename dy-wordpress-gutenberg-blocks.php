@@ -40,6 +40,6 @@ add_action( 'block_categories_all', 'dy_wordpress_gutenberg_blocks_add_block_cat
  * through the block editor in the corresponding context.
  */
 function dy_wordpress_gutenberg_blocks_init() {
-	register_block_type( __DIR__ . '/build/blocks/font-awesome-button-with-icon' );
+	register_block_type( __DIR__ . '/build/blocks/button-with-icon' );
 }
 add_action( 'init', 'dy_wordpress_gutenberg_blocks_init' );
