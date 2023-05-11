@@ -41,5 +41,6 @@ add_action( 'block_categories_all', 'dy_wordpress_gutenberg_blocks_add_block_cat
  */
 function dy_wordpress_gutenberg_blocks_init() {
 	register_block_type( __DIR__ . '/build/blocks/button-with-icon' );
+	register_block_type( __DIR__ . '/build/blocks/post-carousel' );
 }
 add_action( 'init', 'dy_wordpress_gutenberg_blocks_init' );
