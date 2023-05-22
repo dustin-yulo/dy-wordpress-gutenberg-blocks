@@ -14,5 +14,66 @@
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "attributes": {}
+  "attributes": {
+    "slidesToShow": {
+      "type": "integer",
+      "default": 3
+    },
+    "slidesToScroll": {
+      "type": "integer",
+      "default": 1
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": true
+    },
+    "slideSpeed": {
+      "type": "integer",
+      "default": 300
+    },
+    "slideDuration": {
+      "type": "integer",
+      "default": 5000
+    },
+    "pauseOnHover": {
+      "type": "boolean",
+      "default": true
+    },
+    "infiniteScroll": {
+      "type": "boolean",
+      "default": true
+    },
+    "postDisplayFeaturedImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "postDisplayPostTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "postMeta": {
+      "type": "array",
+      "default": []
+    },
+    "postMetaSeparator": {
+      "type": "string",
+      "default": "|"
+    },
+    "querySource": {
+      "type": "string",
+      "default": "post"
+    },
+    "queryOrder": {
+      "type": "string",
+      "default": "desc"
+    },
+    "queryOrderBy": {
+      "type": "string",
+      "default": "date"
+    },
+    "queryNumberOfItems": {
+      "type": "integer",
+      "default": 10
+    }
+  }
 }

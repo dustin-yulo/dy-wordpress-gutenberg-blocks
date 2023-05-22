@@ -1,1 +1,28 @@
-// styles for editor
+.dy-wordpress-gutenberg-blocks-post-carousel-inspector-controls {
+
+	.input-field {
+		margin: 0 !important;
+
+		&.input-type-number,
+		&.input-type-text-short {
+			width: 65px;
+		}
+	}
+
+	.toggle-control-row {
+		width: 100%;
+
+		.components-flex {
+			justify-content: space-between;
+
+			label {
+				flex: 0 1 auto;
+				order: -1;
+			}
+		}
+	}
+
+	.components-form-token-field {
+		width: 100%;
+	}
+}
