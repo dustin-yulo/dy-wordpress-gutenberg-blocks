@@ -30,10 +30,18 @@ export const usePostTypes = () => {
 	return { postTypesSelectOptions };
 };
 
-export const usePostTypeForPosts = ( postType, numberOfPosts ) => {
+export const usePostTypeForPosts = (
+	postType,
+	postOrder,
+	postOrderBy,
+	numberOfPosts
+) => {
 	const selectedPosts = useSelect( ( select ) => {
 		return select( 'core' ).getEntityRecords( 'postType', postType, {
 			per_page: parseInt( numberOfPosts ),
+			_embed: true,
+			order: postOrder,
+			orderby: postOrderBy,
 		} );
 	} );
 
@@ -59,5 +67,18 @@ export const usePostTypeForPosts = ( postType, numberOfPosts ) => {
 		return availableMetaKeys;
 	}, [ selectedPosts ] );
 
-	return { selectedPostsMetaKeys };
+	const selectedPostsMetaKeysSelectOptions = useMemo(
+		() =>
+			( selectedPostsMetaKeys || [] ).map( ( selectedPostsMetaKey ) => ( {
+				label: selectedPostsMetaKey,
+				value: selectedPostsMetaKey,
+			} ) ),
+		[ selectedPostsMetaKeys ]
+	);
+
+	return {
+		selectedPosts,
+		selectedPostsMetaKeys,
+		selectedPostsMetaKeysSelectOptions,
+	};
 };

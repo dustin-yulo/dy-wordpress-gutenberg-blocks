@@ -23,7 +23,7 @@
 			"type": "integer",
 			"default": 1
 		},
-		"autoplay": {
+		"slideAutoplay": {
 			"type": "boolean",
 			"default": true
 		},
@@ -46,6 +46,13 @@
 		"postDisplayFeaturedImage": {
 			"type": "boolean",
 			"default": true
+		},
+		"postDisplayPostMetaAsImage": {
+			"type": "boolean",
+			"default": false
+		},
+		"postDisplayPostMetaKey": {
+			"type": "string"
 		},
 		"postDisplayPostTitle": {
 			"type": "boolean",
