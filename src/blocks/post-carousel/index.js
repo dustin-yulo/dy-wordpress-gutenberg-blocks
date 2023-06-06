@@ -2,7 +2,6 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import DYPostCarouselMetaData from './block.json';
 import DYPostCarouselEdit from './edit';
-import DYPostCarouselSave from './save';
 import './style.scss';
 
 registerBlockType( DYPostCarouselMetaData.name, {
@@ -14,5 +13,7 @@ registerBlockType( DYPostCarouselMetaData.name, {
 		},
 	],
 	edit: DYPostCarouselEdit,
-	save: DYPostCarouselSave,
+	save: () => {
+		// save function is empty since it is being handled by the PHP callback
+	},
 } );
