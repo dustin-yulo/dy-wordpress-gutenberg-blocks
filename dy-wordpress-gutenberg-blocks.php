@@ -34,6 +34,19 @@ function dy_wordpress_gutenberg_blocks_add_block_categories( $categories ) {
 }
 add_action( 'block_categories_all', 'dy_wordpress_gutenberg_blocks_add_block_categories' );
 
+// Enqueue required scripts
+function dy_wordpress_gutenberg_blocks_scripts() {
+    wp_enqueue_script(
+        'swiper-custom-element',
+        'https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js',
+        [],
+        '9.3.2',
+        true
+    );
+}
+add_action( 'wp_enqueue_scripts', 'dy_wordpress_gutenberg_blocks_scripts' );
+add_action( 'enqueue_block_editor_assets', 'dy_wordpress_gutenberg_blocks_scripts' );
+
 // Require the custom block's callbacks if necessary
 require_once( 'includes/post-carousel/post-carousel-block.php' );
 
