@@ -90,7 +90,7 @@ export default function DYPostCarouselEdit( { attributes, setAttributes } ) {
 								value={ slidesToShow }
 								onChange={ ( newSlidesToShow ) => {
 									const parsedSlidesToShow = newSlidesToShow
-										? parseInt( newSlidesToShow )
+										? parseFloat( newSlidesToShow )
 										: 1;
 
 									setAttributes( {
@@ -99,6 +99,7 @@ export default function DYPostCarouselEdit( { attributes, setAttributes } ) {
 								} }
 								isDragEnabled={ false }
 								min={ 1 }
+								step="any"
 								required={ true }
 							/>
 						</PanelRow>

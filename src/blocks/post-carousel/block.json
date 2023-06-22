@@ -16,7 +16,7 @@
 	"style": "file:./style-index.css",
 	"attributes": {
 		"slidesToShow": {
-			"type": "integer",
+			"type": "number",
 			"default": 3
 		},
 		"slidesToScroll": {
