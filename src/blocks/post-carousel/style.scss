@@ -56,9 +56,15 @@
 			align-items: center;
 			gap: 15px;
 			font-size: 15px;
+			font-weight: 400;
 			color: #009bc6;
+			background-color: unset;
 			text-transform: uppercase;
 			cursor: pointer;
+			padding: 0;
+			margin: 0;
+			border: none;
+			border-radius: unset;
 
 			&:hover {
 
@@ -136,8 +142,12 @@
 				width: 12px;
 				height: 12px;
 				margin: 0 6px;
+				padding: 0;
 				background-color: #373737;
+				border: none;
+				border-radius: 50%;
 				opacity: 1;
+				transition: none;
 
 				&.swiper-pagination-bullet-active {
 					background-color: #009bc6;
