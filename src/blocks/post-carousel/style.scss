@@ -28,7 +28,7 @@
 				}
 
 				.dy-post-meta {
-					margin: auto auto 12px;
+					margin: auto auto 0.67em;
 					color: #009bc6;
 					font-weight: 300;
 				}
@@ -152,6 +152,46 @@
 				&.swiper-pagination-bullet-active {
 					background-color: #009bc6;
 				}
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+
+	.wp-block-dy-wordpress-gutenberg-blocks-post-carousel {
+
+		.dy-post-list {
+
+			.dy-post-list-item {
+
+				.dy-post-list-item-link {
+
+					.dy-post-list-item-image {
+						margin-bottom: 20px;
+					}
+				}
+			}
+		}
+
+		.swiper-custom-slider-controls-container {
+			margin-top: 40px;
+			flex-wrap: wrap;
+
+			.swiper-custom-navigation-button {
+
+				&.button-prev {
+					order: 1;
+				}
+
+				&.button-next {
+					order: 2;
+				}
+			}
+
+			.swiper-custom-pagination-container {
+				order: 3;
+				margin: 30px auto;
 			}
 		}
 	}

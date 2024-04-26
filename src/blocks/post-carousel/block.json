@@ -15,9 +15,21 @@
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"attributes": {
+		"slideID": {
+			"type": "string",
+			"default": ""
+		},
 		"slidesToShow": {
 			"type": "number",
 			"default": 3
+		},
+		"slidesToShowTablet": {
+			"type": "number",
+			"default": 2
+		},
+		"slidesToShowMobile": {
+			"type": "number",
+			"default": 1
 		},
 		"slidesToScroll": {
 			"type": "integer",

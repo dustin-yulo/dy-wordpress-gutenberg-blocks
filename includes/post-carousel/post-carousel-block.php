@@ -2,6 +2,8 @@
 
 function dy_post_carousel_block( $attributes ) {
 
+	$slideID = isset( $attributes[ 'slideID' ] ) ? $attributes[ 'slideID' ] : '';
+
 	$querySource = isset( $attributes[ 'querySource' ] ) ? $attributes[ 'querySource' ] : 'post';
 	$queryOrder = isset( $attributes[ 'queryOrder' ] ) ? $attributes[ 'queryOrder' ] : 'desc';
 	$queryOrderBy = isset( $attributes[ 'queryOrderBy' ] ) ? $attributes[ 'queryOrderBy' ] : 'date';
@@ -18,27 +20,12 @@ function dy_post_carousel_block( $attributes ) {
 	$infiniteScroll = isset( $attributes[ 'infiniteScroll' ] ) ? $attributes[ 'infiniteScroll' ] : true;
 	$slidesToScroll = isset( $attributes[ 'slidesToScroll' ] ) ? $attributes[ 'slidesToScroll' ] : 1;
 	$slidesToShow = isset( $attributes[ 'slidesToShow' ] ) ? $attributes[ 'slidesToShow' ] : 3;
+	$slidesToShowTablet = isset( $attributes[ 'slidesToShowTablet' ] ) ? $attributes[ 'slidesToShowTablet' ] : 2;
+	$slidesToShowMobile = isset( $attributes[ 'slidesToShowMobile' ] ) ? $attributes[ 'slidesToShowMobile' ] : 1;
 	$slideSpeed = isset( $attributes[ 'slideSpeed' ] ) ? $attributes[ 'slideSpeed' ] : 300;
 	$slideAutoplay = isset( $attributes[ 'slideAutoplay' ] ) ? $attributes[ 'slideAutoplay' ] : true;
 	$slideDuration = isset( $attributes[ 'slideDuration' ] ) ? $attributes[ 'slideDuration' ] : 5000;
 	$pauseOnHover = isset( $attributes[ 'pauseOnHover' ] ) ? $attributes[ 'pauseOnHover' ] : true;
-
-	$swiper_attributes  = 'allow-touch-move=false';
-	$swiper_attributes .= ' loop=' . $infiniteScroll . '';
-	$swiper_attributes .= ' slides-per-group=' . $slidesToScroll . '';
-	$swiper_attributes .= ' slides-per-view=' . $slidesToShow . '';
-	$swiper_attributes .= ' space-between=50';
-	$swiper_attributes .= ' speed=' . $slideSpeed . '';
-	$swiper_attributes .= ' navigation-next-el=.swiper-custom-navigation-button.button-next';
-	$swiper_attributes .= ' navigation-prev-el=.swiper-custom-navigation-button.button-prev';
-	$swiper_attributes .= ' pagination-clickable=true';
-	$swiper_attributes .= ' pagination-el=.swiper-custom-pagination-container';
-
-	if( $slideAutoplay ) {
-		$swiper_attributes .= ' autoplay-delay=' . $slideDuration . '';
-		$swiper_attributes .= ' autoplay-disable-on-interaction=false';
-		$swiper_attributes .= ' autoplay-pause-on-mouse-enter=' . $pauseOnHover . '';
-	}
 
 
 	$selectedPosts = get_posts( [
@@ -49,10 +36,10 @@ function dy_post_carousel_block( $attributes ) {
 		'post_status' => 'publish'
 	] );
 	
-	$dy_post_carousel = '<div ' . get_block_wrapper_attributes() . '>';
+	$dy_post_carousel = '<div ' . get_block_wrapper_attributes() . ' id="' . esc_attr( $slideID ) . '">';
 
 	if( $selectedPosts && !empty( $selectedPosts ) && is_array( $selectedPosts ) ) {
-		$dy_post_carousel .= '<swiper-container ' . esc_attr( $swiper_attributes ) . ' class="dy-wordpress-gutenberg-blocks-post-carousel dy-post-list">';
+		$dy_post_carousel .= '<swiper-container class="dy-wordpress-gutenberg-blocks-post-carousel dy-post-list" init="false">';
 			
 			foreach( $selectedPosts as $selectedPost ) {
 				$selectedPostID = $selectedPost->ID;
@@ -143,6 +130,48 @@ function dy_post_carousel_block( $attributes ) {
 	}
 
 	$dy_post_carousel .= '</div>';
+
+	$dy_post_carousel .= '
+	<script>
+		Object.assign( document.querySelector( "#' . $slideID . ' swiper-container" ), {
+			loop: ' . $infiniteScroll . ',
+			slidesPerView: ' . $slidesToShowMobile . ',
+			slidesPerGroup: ' . $slidesToScroll . ',
+			spaceBetween: 50,
+			speed: ' . $slideSpeed . ',';
+
+		if ( $slideAutoplay ) {
+			$dy_post_carousel .= '
+			autoplay: {
+				delay: ' . $slideDuration . ',
+				disableOnInteraction: false,
+				pauseOnMouseEnter: ' . $pauseOnHover . '
+			},';
+		}
+
+		$dy_post_carousel .= '
+			navigation: {
+				nextEl: ".swiper-custom-navigation-button.button-next",
+				prevEl: ".swiper-custom-navigation-button.button-prev"
+			},
+			pagination: {
+				clickable: true,
+				el: ".swiper-custom-pagination-container"
+			},
+			breakpoints: {
+				768: {
+					allowTouchMove: false,
+					slidesPerView: ' . $slidesToShowTablet . '
+				},
+				1025: {
+					slidesPerView: ' . $slidesToShow . '
+				}
+			}
+		} );
+
+		document.querySelector( "#' . $slideID . ' swiper-container" ).initialize();
+	</script>
+	';
 
 	return $dy_post_carousel;
 }

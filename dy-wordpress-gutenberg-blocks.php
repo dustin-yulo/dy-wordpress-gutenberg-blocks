@@ -40,8 +40,7 @@ function dy_wordpress_gutenberg_blocks_scripts() {
         'swiper-custom-element',
         'https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js',
         [],
-        '9.3.2',
-        true
+        '9.4.1'
     );
 }
 add_action( 'wp_enqueue_scripts', 'dy_wordpress_gutenberg_blocks_scripts' );

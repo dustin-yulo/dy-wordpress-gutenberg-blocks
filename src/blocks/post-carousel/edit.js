@@ -16,7 +16,10 @@ import './editor.scss';
 
 export default function DYPostCarouselEdit( { attributes, setAttributes } ) {
 	const {
+		slideID,
 		slidesToShow,
+		slidesToShowTablet,
+		slidesToShowMobile,
 		slidesToScroll,
 		slideAutoplay,
 		slideSpeed,
@@ -34,6 +37,14 @@ export default function DYPostCarouselEdit( { attributes, setAttributes } ) {
 		queryOrderBy,
 		queryNumberOfItems,
 	} = attributes;
+
+	if ( ! slideID ) {
+		setAttributes( {
+			slideID: `slideID_${ new Date().getTime() }_${ Math.floor(
+				Math.random() * 1000
+			) }`,
+		} );
+	}
 
 	const { postTypesSelectOptions } = usePostTypes();
 
@@ -95,6 +106,78 @@ export default function DYPostCarouselEdit( { attributes, setAttributes } ) {
 
 									setAttributes( {
 										slidesToShow: parsedSlidesToShow,
+									} );
+								} }
+								isDragEnabled={ false }
+								min={ 1 }
+								step="any"
+								required={ true }
+							/>
+						</PanelRow>
+						<PanelRow className="slides-to-show-tablet">
+							<label htmlFor="carousel-settings__slides-to-show-tablet">
+								{ __(
+									'Slides to show (Tablet)',
+									'dy-wordpress-gutenberg-blocks'
+								) }
+								<span className="helper-text">
+									{ __(
+										'Screen width less than 1025px',
+										'dy-wordpress-gutenberg-blocks'
+									) }
+								</span>
+							</label>
+							<NumberControl
+								id="carousel-settings__slides-to-show-tablet"
+								className="input-field input-type-number"
+								value={ slidesToShowTablet }
+								onChange={ ( newSlidesToShowTablet ) => {
+									const parsedSlidesToShowTablet =
+										newSlidesToShowTablet
+											? parseFloat(
+													newSlidesToShowTablet
+											  )
+											: 1;
+
+									setAttributes( {
+										slidesToShowTablet:
+											parsedSlidesToShowTablet,
+									} );
+								} }
+								isDragEnabled={ false }
+								min={ 1 }
+								step="any"
+								required={ true }
+							/>
+						</PanelRow>
+						<PanelRow className="slides-to-show-mobile">
+							<label htmlFor="carousel-settings__slides-to-show-mobile">
+								{ __(
+									'Slides to show (Mobile)',
+									'dy-wordpress-gutenberg-blocks'
+								) }
+								<span className="helper-text">
+									{ __(
+										'Screen width less than 768px',
+										'dy-wordpress-gutenberg-blocks'
+									) }
+								</span>
+							</label>
+							<NumberControl
+								id="carousel-settings__slides-to-show-mobile"
+								className="input-field input-type-number"
+								value={ slidesToShowMobile }
+								onChange={ ( newSlidesToShowMobile ) => {
+									const parsedSlidesToShowMobile =
+										newSlidesToShowMobile
+											? parseFloat(
+													newSlidesToShowMobile
+											  )
+											: 1;
+
+									setAttributes( {
+										slidesToShowMobile:
+											parsedSlidesToShowMobile,
 									} );
 								} }
 								isDragEnabled={ false }
