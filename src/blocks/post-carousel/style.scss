@@ -5,9 +5,50 @@
 		.dy-post-list-item {
 
 			.dy-post-list-item-link {
+				display: block;
 				text-decoration: none;
 				font-size: 18px;
 				line-height: 1.25;
+				transition: 0.3s ease-in-out;
+
+				&::before,
+				&::after {
+					content: "";
+					position: absolute;
+					width: 0%;
+					height: 0%;
+					border: none;
+					visibility: hidden;
+					opacity: 0;
+					transition: width 0.3s ease-in-out, height 0.3s ease-in-out, visibility 0s ease-in-out 0.3s, opacity 0s ease-in-out 0.3s;
+				}
+
+				&::before {
+					top: 0;
+					left: 0;
+					border-top: 1px solid #009bc6;
+					border-left: 1px solid #009bc6;
+				}
+
+				&::after {
+					right: 0;
+					bottom: 0;
+					border-bottom: 1px solid #009bc6;
+					border-right: 1px solid #009bc6;
+				}
+
+				&:hover {
+					padding: 4.75%;
+
+					&::before,
+					&::after {
+						width: calc(100% - 1px);
+						height: calc(100% - 1px);
+						visibility: visible;
+						opacity: 1;
+						transition: width 0.3s ease-in-out, height 0.3s ease-in-out, visibility 0s ease-in-out 0s, opacity 0s ease-in-out 0s;
+					}
+				}
 
 				.dy-post-list-item-image {
 					position: relative;
