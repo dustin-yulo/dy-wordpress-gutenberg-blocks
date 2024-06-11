@@ -28,13 +28,15 @@ function dy_post_carousel_block( $attributes ) {
 	$pauseOnHover = isset( $attributes[ 'pauseOnHover' ] ) ? $attributes[ 'pauseOnHover' ] : true;
 
 
-	$selectedPosts = get_posts( [
+	$args = apply_filters( 'dy_query_args_filter', [
 		'post_type' => $querySource,
 		'order' => $queryOrder,
 		'orderby' => $queryOrderBy,
 		'numberposts' => $queryNumberOfItems,
 		'post_status' => 'publish'
 	] );
+
+	$selectedPosts = get_posts( $args );
 	
 	$dy_post_carousel = '<div ' . get_block_wrapper_attributes() . ' id="' . esc_attr( $slideID ) . '">';
 
