@@ -1,0 +1,98 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "dy-wordpress-gutenberg-blocks/post-carousel",
+  "version": "1.0.0",
+  "title": "Post Carousel",
+  "category": "dy-wordpress-gutenberg-blocks",
+  "description": "Powered by Swiper JS. Post Carousel is a versatile tool for displaying posts or articles on your website, offering options for customization and intuitive touch-swipe navigation, ideal for visually engaging content displays.",
+  "icon": "slides",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "dy-wordpress-gutenberg-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "slideID": {
+      "type": "string",
+      "default": ""
+    },
+    "slidesToShow": {
+      "type": "number",
+      "default": 3
+    },
+    "slidesToShowTablet": {
+      "type": "number",
+      "default": 2
+    },
+    "slidesToShowMobile": {
+      "type": "number",
+      "default": 1
+    },
+    "slidesToScroll": {
+      "type": "integer",
+      "default": 1
+    },
+    "slideAutoplay": {
+      "type": "boolean",
+      "default": true
+    },
+    "slideSpeed": {
+      "type": "integer",
+      "default": 300
+    },
+    "slideDuration": {
+      "type": "integer",
+      "default": 5000
+    },
+    "pauseOnHover": {
+      "type": "boolean",
+      "default": true
+    },
+    "infiniteScroll": {
+      "type": "boolean",
+      "default": true
+    },
+    "postDisplayFeaturedImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "postDisplayPostMetaAsImage": {
+      "type": "boolean",
+      "default": false
+    },
+    "postDisplayPostMetaKey": {
+      "type": "string"
+    },
+    "postDisplayPostTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "postMeta": {
+      "type": "array",
+      "default": []
+    },
+    "postMetaSeparator": {
+      "type": "string",
+      "default": "|"
+    },
+    "querySource": {
+      "type": "string",
+      "default": "post"
+    },
+    "queryOrder": {
+      "type": "string",
+      "default": "desc"
+    },
+    "queryOrderBy": {
+      "type": "string",
+      "default": "date"
+    },
+    "queryNumberOfItems": {
+      "type": "integer",
+      "default": 10
+    }
+  }
+}
