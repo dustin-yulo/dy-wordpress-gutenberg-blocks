@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name:       DY - Wordpress Gutenberg Blocks
- * Description:       Custom WordPress Gutenberg blocks that you just might need. Simple, lightweight, free!
+ * Description:       Custom Gutenberg blocks. Simple, lightweight, and free!
  * Requires at least: 5.9
  * Requires PHP:      7.4
  * Version:           1.0.0
  * Author:            Dustin Yulo
- * Author URI:		  https://dustinyulo.com/
+ * Author URI:		  https://dustinyulo.dev/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       dy-wordpress-gutenberg-blocks
